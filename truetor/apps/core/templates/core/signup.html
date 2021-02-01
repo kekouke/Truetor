@@ -5,6 +5,16 @@
         <div class="columns">
             <div class="column is-12">
                 <h1 class="title">Sign Up</h1>
+
+                <form method="post" action=".">
+                    {% csrf_token %}
+
+                    <!-- Add 'if-else construction' -->
+
+                    {{ form.as_p }}
+
+                    <button class="button is-succes" type="submit">Sign up</button>
+                </form>
             </div>
         </div>
     </div>

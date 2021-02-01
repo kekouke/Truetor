@@ -1,4 +1,4 @@
-#!C:\Users\Mi\Desktop\Twitter\twitter_3_8_0\Scripts\python.exe
+#!c:\users\mi\desktop\twitter\twitter_3_8_0\scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

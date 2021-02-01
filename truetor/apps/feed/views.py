@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Tweet
 
+from django.contrib.auth.models import User
+
 @login_required
 def feed(request):
     user_ids = [request.user.id]
@@ -13,7 +15,7 @@ def feed(request):
 
     tweets = Tweet.objects.filter(created_by_id__in=user_ids)
 
-    return render(request, 'feed/feed.html', { 'oinks': tweets })
+    return render(request, 'feed/feed.html', { 'tweets': tweets })
 
 
 @login_required

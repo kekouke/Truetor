@@ -1,14 +1,16 @@
 {% extends 'core/base.html' %}
 
+{% load humanize %}
+
 {% block content %}
     <div class="container" id="feedapp">
         <div class="columns">
             <div class="column is-12">
                 <div class="wrapper-form">
-                    <form v-on:submit.prevent="submitTwit()">
+                    <form v-on:submit.prevent="submitTweet()">
                         <div class="field">
                             <div class="control">
-                                <textarea class="textarea" v-model="body" placeholder="What do you want to twit?"></textarea>
+                                <textarea class="textarea" v-model="body" placeholder="What do you want to tweet?"></textarea>
                             </div>
 
                             <div class="field">
@@ -20,11 +22,18 @@
                     </form>
                 </div>
 
-                <div class="wrapper-twits">
-                    <div class="twit" v-for="twit in twits">
-                        <p class="name">[[ twit.user ]]</p>
-                        <p>[[ twit.body ]]</p>
-                        <p class="info">[[ twit.created_at ]]</p>
+                <div class="wrapper-tweets">
+                    {% for tweet in tweets %}
+                        <div class="tweet">
+                            <p class="name">{{ tweet.created_by.username }}</p>
+                            <p>{{ tweet.body }}</p>
+                            <p class="info">{{ tweet.created_at|naturaltime }}</p>
+                        </div>
+                    {% endfor %}
+                    <div class="tweet" v-for="tweet in tweets">
+                        <p class="name">[[ tweet.user ]]</p>
+                        <p>[[ tweet.body ]]</p>
+                        <p class="info">[[ tweet.created_at ]]</p>
                     </div>
                 </div>
             </div>
@@ -39,26 +48,42 @@
         delimiters: ['[[',']]'],
         data() {
             return {
-                twits: [],
+                tweets: [],
                 body: '',
                 user: '{{ request.user.username }}',
                 created_at: 'Now'
             }
         },
         methods: {
-            submitTwit() {
-                console.log('submitTwit');
+            submitTweet() {
+                console.log('submitTweet');
 
                 if (this.body.length > 0) {
-                    var twit = {
+                    var tweet = {
                         'body': this.body,
                         'user': this.user,
                         'created_at': this.created_at
                     };
 
-                    this.twits.unshift(twit);
+                    this.tweets.unshift(tweet);
 
                     // sent to backend (dma117)
+
+                    fetch('/api/add_tweet/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        },
+                        credentials: 'same-origin',
+                        body: JSON.stringify(tweet)
+                    })
+                    .then((response) => {
+                        console.log(response);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
                 }
 
                 this.body = '';

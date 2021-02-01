@@ -14,3 +14,20 @@ def feed(request):
     tweets = Tweet.objects.filter(created_by_id__in=user_ids)
 
     return render(request, 'feed/feed.html', { 'oinks': tweets })
+
+
+@login_required
+def search(request):
+    query = request.GET.get('query', '')
+
+    if len(query) > 0:
+        tweets = User.objects.filter(username__icontains=query)
+    else:
+        tweets = []
+
+    context = {
+        'query': query,
+        'tweets': tweets
+    }
+
+    return render(request, 'feed/search.html', context)

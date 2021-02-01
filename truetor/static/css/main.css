@@ -1,0 +1,23 @@
+body {
+    background-color: #f9f9f9;
+}
+
+.wrapper-twits {
+    margin-top: 30px;
+}
+
+.wrapper-twits .twit {
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.wrapper-twits .twit .name {
+    font-weight: bold;
+}
+
+.wrapper-twits .twit .info {
+    font-size: 12px;
+    color: #aaa;
+}

@@ -140,11 +140,8 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-<<<<<<< HEAD
 
 
 import dj_database_url
 prod_db  =  dj_database_url.config()
 DATABASES['default'].update(prod_db)
-=======
->>>>>>> 87a712ef77d48d98da8210295662a32ee7aae444

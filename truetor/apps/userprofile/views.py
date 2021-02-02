@@ -49,10 +49,10 @@ def edit_profile(request):
         if form.is_valid():
             form.save()
 
-            return redirect('oinkerprofile', username=request.user.username)
+            return redirect('userprofile', username=request.user.username)
 
     else:
         form = UserProfileForm(instance=request.user.userprofile)
 
-    return render(request, 'oinkerprofile/edit_profile.html', { 'user': user,
+    return render(request, 'userprofile/edit_profile.html', { 'user': request.user.username,
                                                                'form': form })

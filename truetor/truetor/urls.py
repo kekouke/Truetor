@@ -16,12 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 from django.contrib.auth import views
 from apps.core.views import frontpage, signup
 from  apps.feed.views import feed, search
 from apps.feed.api import api_add_tweet
 
-from apps.userprofile.views import userprofile, follow_user, unfollow_user, followers, follows
+from apps.userprofile.views import userprofile, edit_profile, follow_user, unfollow_user, followers, follows
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,6 +40,7 @@ urlpatterns = [
     path('u/<str:username>/unfollow', unfollow_user, name='unfollow_user'),
     path('u/<str:username>/followers', followers, name='followers'),
     path('u/<str:username>/follows', follows, name='follows'),
+    path('edit_profile/', edit_profile, name='edit_profile'),
 
     path('api/add_tweet/', api_add_tweet, name='api_add_tweet')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

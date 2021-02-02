@@ -48,7 +48,7 @@ INSTALLED_APPS = [
 
     'core.apps.CoreConfig',
     'feed.apps.FeedConfig',
-    'userprofile.apps.UserprofileConfig'
+    'userprofile.apps.UserprofileConfig',
 ]
 
 MIDDLEWARE = [

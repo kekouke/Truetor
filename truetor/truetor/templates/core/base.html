@@ -43,7 +43,7 @@
                         </form>
                             <a href="{% url 'feed' %}" class="nav-item text-center">Feed</a>
                             <a href="{% url 'userprofile' request.user.username %}" class="nav-item text-center">Profile</a>
-                            <a href="{% url 'edit_profile' %}" class="nav-item text-center">Edit profile</a>
+                            <a href="{% url 'edit_profile' %}" class="nav-item text-center">Edit Profile</a>
                         {% endif %}
                         <div class="nav-item">
                                 {% if request.user.is_authenticated %}

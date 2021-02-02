@@ -29,10 +29,10 @@ urlpatterns = [
     path('', include('feed.urls')),
     path('', include('userprofile.urls')),
 
-    path('logout/', views.LogoutView.as_view(), name='logout'),
-    path('login/', views.LoginView.as_view(template_name='core/login.html'), name='login'),
+    path('/logout/', views.LogoutView.as_view(), name='logout'),
+    path('/login/', views.LoginView.as_view(template_name='core/login.html'), name='login'),
 
-    path('u/', include('userprofile.urls')),
+    # path('u/', include('userprofile.urls')),
 #path('u/<str:username>/edit_profile', views.edit_profile, name='edit_profile'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

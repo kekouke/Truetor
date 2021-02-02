@@ -3,7 +3,7 @@ import json
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 
-from .models import Tweet
+from .models import Tweet, Like
 
 @login_required
 def api_add_tweet(request):
@@ -24,4 +24,4 @@ def api_add_like(request):
 
     response = { 'seccess': True }
 
-    return JsonResponse(response);
+    return JsonResponse(response)

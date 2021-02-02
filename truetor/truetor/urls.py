@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 from django.contrib.auth import views
 from apps.core.views import frontpage, signup
 from  apps.feed.views import feed, search
-from apps.feed.api import api_add_tweet
+from apps.feed.api import api_add_tweet, api_add_like
 
 from apps.userprofile.views import userprofile, edit_profile, follow_user, unfollow_user, followers, follows
 
@@ -42,5 +42,7 @@ urlpatterns = [
     path('u/<str:username>/follows', follows, name='follows'),
     path('edit_profile/', edit_profile, name='edit_profile'),
 
-    path('api/add_tweet/', api_add_tweet, name='api_add_tweet')
+    path('api/add_tweet/', api_add_tweet, name='api_add_tweet'),
+    path('api/add_like/', api_add_like, name = 'api_add_like')
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

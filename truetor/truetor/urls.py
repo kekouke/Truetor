@@ -25,18 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', include('core.urls')),
-    path('sign_up/', include('core.urls')),
-
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('login/', views.LoginView.as_view(template_name='core/login.html'), name='login'),
-
-    path('search/', include('feed.urls')),
-    path('feed/', include('feed.urls')),
-
     path('u/<str:username>/', include('userprofile.urls')),
-
-    ################ Feed Application API ################
-
-    path('api/', include('feed.urls'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

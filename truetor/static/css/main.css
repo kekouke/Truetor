@@ -1,5 +1,5 @@
 body {
-    background-color: #f9f9f9;
+    background-color: #ffffff;
 }
 
 .wrapper-tweets {
@@ -20,4 +20,28 @@ body {
 .wrapper-tweets .tweet .info {
     font-size: 12px;
     color: #aaa;
+}
+
+#splash-img {
+    background: url(https://images.unsplash.com/photo-1524838101135-a71ba219084d?auto=format&fit=crop&ixid=eyJhcHBfaWQiOjEyMDd9&ixlib=rb-1.2.1&q=100&w=2560);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+.hero .hero-body {
+    align-items: normal;
+}
+
+img {
+    max-width: 150%;
+}
+
+.avatar {
+    background-color: var(--cirrus-select-bg);
+}
+
+.fullscreen {
+    height: screen;
+    overflow: auto;
 }

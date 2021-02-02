@@ -3,22 +3,18 @@
 {% load humanize %}
 
 {% block content %}
-    <div class="container">
-        <div class="columns">
-            <div class="column is-12">
+    <div class="content">
+        <div class="row">
+            <div class="col-12">
                 <h1 class="title">Search</h1>
                 <p>Search term: "{{ query }}"</p>
                 <hr>
                 <form method="get" action="{% url 'search' %}">
-                    <div class="field">
-                        <div class="control">
-                            <input type="text" class="input" name="query" value="{{ query }}">
-                        </div>
+                    <div>
+                        <input type="text" name="query" value="{{ query }}">
                     </div>
-                    <div class="field">
-                        <div class="control">
-                            <button class="button is-success">Search</button>
-                        </div>
+                    <div>
+                        <button class="btn-success my-2">Search</button>
                     </div>
                 </form>
                 <hr>

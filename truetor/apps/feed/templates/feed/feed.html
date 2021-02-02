@@ -3,9 +3,9 @@
 {% load humanize %}
 
 {% block content %}
-    <div class="container" id="feedapp">
-        <div class="columns">
-            <div class="column is-12">
+    <div class="content" id="feedapp">
+        <div class="row">
+            <div class="col-12">
                 <div class="wrapper-form">
                     <form v-on:submit.prevent="submitTweet()">
                         <div class="field">
@@ -24,16 +24,14 @@
 
                 <div class="wrapper-tweets">
                     <div class="tweet" v-for="tweet in tweets">
-                        <article class="media">
-                            <figure class="media-left">
-                                <p class="image is-64x64">
-                                    <img :src="tweet.avatar">
-                                </p>
-                            </figure>
-                            <div class="media-content">
-                                <div class="content">
-                                    <p>
-                                        <strong>[[ tweet.user ]]</strong>
+                        <article>
+                            <div class="tile m-0 level">
+                                <div class="tile__icon">
+                                    <figure class="avatar avatar--xlarge"><img :src="tweet.avatar"></figure>
+                                </div>
+                                <div class="tile__container">
+                                    <p class="tile__title m-0"><strong>[[ tweet.user ]]</strong></p>
+                                    <p class="tile__subtitle m-0">
                                         <small>[[ tweet.created_at ]]</small>
                                         <br>
                                         [[ tweet.body ]]
@@ -44,25 +42,29 @@
                     </div>
                     {% for tweet in tweets %}
                         <div class="tweet">
-                            <article class="media">
-                                <figure class="media-left">
-                                    <p class="image is-64x64">
-                                        {% if tweet.created_by.userprofile.avatar %}
-                                            <img src="{{ tweet.created_by.userprofile.avatar.url }}">
-                                        {% endif %}
-                                    </p>
-                                </figure>
-                                <div class="media-content">
-                                    <div class="content">
-                                        <p>
+                            <article>
+                                <div class="tile m-0 level">
+                                    <div class="tile__icon">
+                                        <figure class="avatar avatar--xlarge">
+                                            {% if tweet.created_by.userprofile.avatar %}
+                                                <img src="{{ tweet.created_by.userprofile.avatar.url }}">
+                                            {% endif %}
+                                        </figure>
+                                    </div>
+                                    <div class="tile__container">
+                                        <p class="tile__title m-0">
                                             <strong>{{ tweet.created_by.username }}</strong>
+                                        </p>
+                                        <p class="tile__subtitle m-0">
                                             <small>{{ tweet.created_at|naturaltime }}</small>
-                                            <br>
-                                            {{ tweet.body }}
-                                            <br>
+                                        </p>
+                                        <p>
+                                            <div class="title font-light">
+                                                {{ tweet.body }}
+                                            </div>
                                             <a @click="likeTweet({{ tweet.id }})" v-if="!liked_tweets.includes({{ tweet.id }})">Like</a>
-                                            <span v-if="liked_tweets.includes({{ tweet.id }})">Liked</span>
-                                            <small id="likes-{{ tweet.id }}">{{ tweet.likes.count }} likes</small>
+                                            <span v-if="liked_tweets.includes({{ tweet.id }})" class="text-purple-400">Liked</span>
+                                            <small id="likes-{{ tweet.id }}" class="font-alt">{{ tweet.likes.count }} likes</small>
                                         </p>
                                     </div>
                                 </div>
@@ -73,6 +75,7 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
 
 {% block script %}

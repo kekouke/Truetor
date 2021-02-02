@@ -7,8 +7,19 @@ from .forms import UserProfileForm
 def userprofile(request, username):
     user = get_object_or_404(User, username=username)
 
+    tweets = user.tweets.all()
+
+    for tweet in tweets:
+        likes = tweet.likes.filter(created_by_id=user.id)
+
+        if likes.count() > 0:
+            tweet.liked = True
+        else:
+            tweet.liked = False
+
     return render(request, 'userprofile/userprofile.html', {
-        'user': user
+        'user': user,
+        'tweets': tweets
     })
 
 

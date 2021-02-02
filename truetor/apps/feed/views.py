@@ -15,6 +15,14 @@ def feed(request):
 
     tweets = Tweet.objects.filter(created_by_id__in=user_ids)
 
+    for tweet in tweets:
+        likes = tweet.likes.filter(created_by_id=request.user.id)
+
+        if likes.count() > 0:
+            tweet.liked = True
+        else:
+            tweet.liked = False
+
     return render(request, 'feed/feed.html', { 'tweets': tweets })
 
 

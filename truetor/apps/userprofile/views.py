@@ -27,3 +27,8 @@ def unfollow_user(request, username):
     request.user.userprofile.follows.remove(user.userprofile)
 
     return redirect('userprofile', username=username)
+
+def followers(request, username):
+    user = get_object_or_404(User, username=username)
+
+    return render(request, 'userprofile/followers.html', { 'user': user })

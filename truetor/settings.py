@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '$#pga%r24j-)^#df(uy=(j18fbumfc3o%-0a7wrf&q8l3zj$@r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['shielded-reef-31781.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'feed'
@@ -140,3 +140,8 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+import dj_database_url
+prod_db  =  dj_database_url.config()
+DATABASES['default'].update(prod_db)

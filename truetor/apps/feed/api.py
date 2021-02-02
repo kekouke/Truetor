@@ -20,7 +20,7 @@ def api_add_like(request):
     tweet_id = data['tweet_id']
 
     if not Like.objects.filter(tweet_id = tweet_id).filter(created_by=request.user).exists():
-        like = Like.objects.created(tweet_id=tweet_id, created_by=request.user)
+        like = Like.objects.create(tweet_id=tweet_id, created_by=request.user)
 
     response = { 'seccess': True }
 

@@ -10,7 +10,7 @@ def userprofile(request, username):
     tweets = user.tweets.all()
 
     for tweet in tweets:
-        likes = tweet.likes.filter(created_by_id=user.id)
+        likes = tweet.likes.filter(created_by_id=request.user.id)
 
         if likes.count() > 0:
             tweet.liked = True

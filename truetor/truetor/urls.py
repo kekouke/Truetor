@@ -14,35 +14,29 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
 
-
 from django.contrib.auth import views
-from apps.core.views import frontpage, signup
-from  apps.feed.views import feed, search
-from apps.feed.api import api_add_tweet, api_add_like
-
-from apps.userprofile.views import userprofile, edit_profile, follow_user, unfollow_user, followers, follows
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', frontpage, name='frontpage'),
-    path('sign_up/', signup, name='sign_up'),
+
+    path('', include('core.urls')),
+    path('sign_up/', include('core.urls')),
+
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('login/', views.LoginView.as_view(template_name='core/login.html'), name='login'),
-    path('feed/', feed, name='feed'),
-    path('search/', search, name='search'),
-    path('u/<str:username>/', userprofile, name='userprofile'),
-    path('u/<str:username>/follow', follow_user, name='follow_user'),
-    path('u/<str:username>/unfollow', unfollow_user, name='unfollow_user'),
-    path('u/<str:username>/followers', followers, name='followers'),
-    path('u/<str:username>/follows', follows, name='follows'),
-    path('edit_profile/', edit_profile, name='edit_profile'),
 
-    path('api/add_tweet/', api_add_tweet, name='api_add_tweet'),
-    path('api/add_like/', api_add_like, name = 'api_add_like')
+    path('search/', include('feed.urls')),
+    path('feed/', include('feed.urls')),
+
+    path('u/<str:username>/', include('userprofile.urls')),
+
+    ################ Feed Application API ################
+
+    path('api/', include('feed.urls'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

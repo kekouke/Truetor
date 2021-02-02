@@ -21,6 +21,8 @@ from apps.core.views import frontpage, signup
 from  apps.feed.views import feed, search
 from apps.feed.api import api_add_tweet
 
+from apps.userprofile.views import userprofile, follow_user, unfollow_user
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', frontpage, name='frontpage'),
@@ -29,6 +31,9 @@ urlpatterns = [
     path('login/', views.LoginView.as_view(template_name='core/login.html'), name='login'),
     path('feed/', feed, name='feed'),
     path('search/', search, name='search'),
+    path('u/<str:username>/', userprofile, name='userprofile'),
+    path('u/<str:username>/follow', follow_user, name='follow_user'),
+    path('u/<str:username>/unfollow', unfollow_user, name='unfollow_user'),
 
     path('api/add_tweet/', api_add_tweet, name='api_add_tweet')
 ]

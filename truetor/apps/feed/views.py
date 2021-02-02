@@ -23,13 +23,13 @@ def search(request):
     query = request.GET.get('query', '')
 
     if len(query) > 0:
-        tweets = User.objects.filter(username__icontains=query)
+        users = User.objects.filter(username__icontains=query)
     else:
-        tweets = []
+        users = []
 
     context = {
         'query': query,
-        'tweets': tweets
+        'users': users
     }
 
     return render(request, 'feed/search.html', context)

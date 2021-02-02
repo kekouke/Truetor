@@ -7,7 +7,11 @@
         <div class="columns">
             <div class="column is-12">
                 <h1 class="title">{{ user.username }}</h1>
-
+                {% if user.userprofile.avatar %}
+                    <figure class="image is-128x128">
+                        <img src="{{ user.userprofile.avatar.url }}">
+                    </figure>
+                {% endif %}
                 <p>
                    <a href="{% url 'followers' user.username %}">Followers: {{ user.userprofile.followed_by.count }}</a>
                 </p>
@@ -34,9 +38,25 @@
                 <div class="wrapper-tweets">
                     {% for tweet in user.tweets.all %}
                         <div class="tweet">
-                            <p class="name"> {{ tweet.created_by.username }}</p>
-                            <p>{{ tweet.body }}</p>
-                            <p class="info">{{ tweet.created_at|naturaltime }}</p>
+                            <article class="media">
+                                <figure class="media-left">
+                                    <p class="image is-64x64">
+                                        {% if user.userprofile.avatar %}
+                                            <img src="{{ user.userprofile.avatar.url }}">
+                                        {% endif %}
+                                    </p>
+                                </figure>
+                                <div class="media-content">
+                                    <div class="content">
+                                        <p>
+                                            <strong>{{ tweet.created_by.username }}</strong>
+                                            <small>{{ tweet.created_at|naturaltime }}</small>
+                                            <br>
+                                            {{ tweet.body }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
                         </div>
                     {% endfor %}
                 </div>
